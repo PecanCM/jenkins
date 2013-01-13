@@ -115,7 +115,7 @@ then
   . ~/.jenkins_profile
 fi
 
-#cp $WORKSPACE/hudson/$REPO_BRANCH.xml .repo/local_manifest.xml
+cp $WORKSPACE/hudson/$REPO_BRANCH.xml .repo/local_manifest.xml
 
 echo Core Manifest:
 cat .repo/manifests/default.xml
