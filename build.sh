@@ -124,7 +124,7 @@ echo Local Manifest:
 cat .repo/local_manifest.xml
 
 echo Syncing...
-repo sync -d -c -f -j64 > /dev/null
+repo sync -d -c -f -j64
 check_result "repo sync failed."
 echo Sync complete.
 
@@ -222,7 +222,7 @@ fi
 
 echo "$REPO_BRANCH-$CORE_BRANCH" > .last_branch
 
-time mka bacon recoveryzip recoveryimage
+time mka bacon recoveryzip recoveryimage #checkapi
 check_result "Build failed."
 
 for f in $(ls $OUT/cm-*.zip*)
