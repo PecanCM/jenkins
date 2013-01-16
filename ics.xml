@@ -15,7 +15,7 @@
   <project path="device/samsung/beni" name="Jellaxy/android_device_samsung_beni" />
   <project path="frameworks/base" name="Jellaxy/android_frameworks_base" />
   <project path="hardware/libhardware_legacy" name="Jellaxy/android_hardware_libhardware_legacy" />
-  <project path="kernel/samsung/msm7x27" name="Jellaxy/samsung_kernel_msm7x27" />
+  <project path="kernel/samsung/msm7x27" name="androidarmv6/android_vendor_samsung" revision="cm-10.1" />
   <project path="packages/apps/Settings" name="Jellaxy/android_packages_apps_Settings" />
   <project path="system/netd" name="Jellaxy/android_system_netd" />
   <project path="vendor/samsung" name="Jellaxy/proprietary_vendor_samsung" />
