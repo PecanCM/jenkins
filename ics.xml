@@ -8,14 +8,14 @@
   <remove-project name="CyanogenMod/android_vendor_cm" />
 
   <project path="bionic" name="Jellaxy/android_bionic" />
-  <project path="device/samsung/msm7x27-common" name="Jellaxy/android_device_samsung_msm7x27-common" />
-  <project path="device/samsung/gio" name="Jellaxy/android_device_samsung_gio" />
+  <project path="device/samsung/msm7x27-common" name="Jellaxy/android_device_samsung_msm7x27-common" revision="ics-test"/>
+  <project path="device/samsung/gio" name="Jellaxy/android_device_samsung_gio" revision="ics-test" />
   <project path="device/samsung/cooper" name="Jellaxy/android_device_samsung_cooper" />
   <project path="device/samsung/tass" name="Jellaxy/android_device_samsung_tass" />
   <project path="device/samsung/beni" name="Jellaxy/android_device_samsung_beni" />
   <project path="frameworks/base" name="Jellaxy/android_frameworks_base" />
   <project path="hardware/libhardware_legacy" name="Jellaxy/android_hardware_libhardware_legacy" />
-  <project path="kernel/samsung/msm7x27" name="androidarmv6/android_kernel_samsung_msm7x27" revision="cm-10.1" />
+  <project path="kernel/samsung/msm7x27" name="Jellaxy/samsung_kernel_msm7x27" />
   <project path="packages/apps/Settings" name="Jellaxy/android_packages_apps_Settings" />
   <project path="system/netd" name="Jellaxy/android_system_netd" />
   <project path="vendor/samsung" name="Jellaxy/proprietary_vendor_samsung" />
