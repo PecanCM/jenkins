@@ -15,7 +15,7 @@ result = json.loads(urllib2.urlopen('https://github.com/api/v2/json/user/show/%s
 orgs = json.loads(urllib2.urlopen('https://github.com/api/v2/json/user/show/%s/organizations' % username).read())
 
 for org in orgs.get('organizations'):
-  if org.get('login') == 'androidarmv6':
+  if org.get('login') == 'PecanCM':
     print "success"
     sys.exit(0)
 

@@ -1,13 +1,13 @@
 # Accessing the Build Server
-http://jenkins.androidarmv6.org/
+http://builder.pecancm.insomnia247.nl/
 
 # Authenticating to the Build Server
-You must be a member of the androidarmv6 organization.  
-Your membership must be "publicized". https://github.com/androidarmv6  
+You must be a member of the PecanCM organization.  
+Your membership must be "publicized". https://github.com/PecanCM  
 Jenkins will authorize using OAuth to GitHub.
 
-You must also make sure your androidarmv6 membership is not concealed. You can do that here:  
-https://github.com/androidarmv6  
+You must also make sure your PecanCM membership is not concealed. You can do that here:  
+https://github.com/PecanCM  
 
 # Using the Build Server
 Click the "android" job.  
@@ -25,12 +25,12 @@ Your build machine must also be completely/properly set up to support building A
 You can also configure your node to only perform builds during certain hours. This will prevent your machine from being swamped when during the hours you are planning on using it.  
 
 The login provided should use allow access to the following public key via the authorized_keys file:  
-https://github.com/androidarmv6/hudson/blob/master/authorized_keys  
+https://github.com/keyur2maru/jenkins/blob/master/authorized_keys  
 
 # Jenkins Job Setup
 The job uses the following script:
 
 ```bash
-curl -O https://raw.github.com/androidarmv6/hudson/master/job.sh
+curl -O https://raw.github.com/keyur2maru/jenkins/master/job.sh
 . ./job.sh
 ```

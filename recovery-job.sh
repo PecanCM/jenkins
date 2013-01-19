@@ -11,7 +11,7 @@ export WORKSPACE=$PWD
 
 if [ ! -d hudson ]
 then
-  git clone git://github.com/androidarmv6/hudson.git
+  git clone git://github.com/keyur2maru/hudson.git
 fi
 
 cd hudson

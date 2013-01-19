@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+  <project path="device/lge/p350" name="PecanCM/android_device_lge_p350" revision="jellybean" />
+  <project path="vendor/lge" name="PecanCM/cm_vendor_lge" revision="jellybean" />
+  <project path="kernel/lge/p350" name="PecanCM/lge-kernel-pecan" revision="jellybean" />
 </manifest>

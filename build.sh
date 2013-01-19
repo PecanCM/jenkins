@@ -79,7 +79,7 @@ then
 fi
 
 git config --global user.name $(whoami)@$NODE_NAME
-git config --global user.email jenkins@androidarmv6.org
+git config --global user.email cm.pecan@yahoo.com
 
 if [[ "$REPO_BRANCH" =~ "jellybean" || $REPO_BRANCH =~ "cm-10" ]]; then 
    JENKINS_BUILD_DIR=jellybean
@@ -97,7 +97,7 @@ then
   CORE_BRANCH=$REPO_BRANCH
 fi
 rm -rf .repo/manifests*
-repo init -u $SYNC_PROTO://github.com/androidarmv6/android.git -b $CORE_BRANCH --reference=/usr/local/android/$BUILD_BRANCH
+repo init -u $SYNC_PROTO://github.com/PecanCM/android.git -b $CORE_BRANCH --reference=/usr/local/android/$BUILD_BRANCH
 check_result "repo init failed."
 
 # make sure ccache is in PATH
@@ -124,7 +124,7 @@ echo Local Manifest:
 cat .repo/local_manifest.xml
 
 echo Syncing...
-repo sync -d -c -f -j64
+repo sync -d -c -f -j18
 check_result "repo sync failed."
 echo Sync complete.
 
