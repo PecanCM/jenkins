@@ -81,9 +81,6 @@ fi
 git config --global user.name $(whoami)@$NODE_NAME
 git config --global user.email cm.pecan@yahoo.com
 
-if [[ "$REPO_BRANCH" =~ "jellybean" || $REPO_BRANCH =~ "cm-10" ]]; then 
-   JENKINS_BUILD_DIR=jellybean
-else
    JENKINS_BUILD_DIR=$REPO_BRANCH
 fi
 
