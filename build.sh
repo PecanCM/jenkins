@@ -225,7 +225,7 @@ echo "$REPO_BRANCH-$CORE_BRANCH" > .last_branch
 time mka bacon recoveryzip recoveryimage #checkapi
 check_result "Build failed."
 
-for f in $(ls $OUT/cm-*.zip*)
+for f in $(ls $JENKINS_BUILD_DIR/$OUT/cm-*.zip*)
 do
   ln $f $WORKSPACE/archive/$(basename $f)
 done
