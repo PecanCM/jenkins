@@ -9,9 +9,9 @@ mkdir -p ../android
 cd ../android
 export WORKSPACE=$PWD
 
-if [ ! -d hudson ]
+if [ ! -d jenkins ]
 then
-  git clone git://github.com/keyur2maru/jenkins.git
+  git clone git://github.com/PecanCM/jenkins.git
 fi
 
 cd jenkins
