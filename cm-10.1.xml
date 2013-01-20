@@ -2,5 +2,5 @@
 <manifest>
   <project path="device/lge/p350" name="PecanCM/android_device_lge_p350" />
   <project path="vendor/lge" name="PecanCM/cm_vendor_lge" />
-  <project path="vendor/qcom/msm7x27" name="androidarmv6/android_vendor_qcom_msm7x27" />
+  <project path="kernel/lge/p350" name="PecanCM/lge-kernel-pecan" />
 </manifest>
