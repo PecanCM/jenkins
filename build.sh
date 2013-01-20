@@ -81,7 +81,7 @@ fi
 git config --global user.name $(whoami)@$NODE_NAME
 git config --global user.email cm.pecan@yahoo.com
 
-if [ "$REPO_BRANCH" =~ "gingerbread" ]; then 
+if [[ "$REPO_BRANCH" =~ "gingerbread" || $REPO_BRANCH =~ "gb-release-7.2" ]]; then 
    JENKINS_BUILD_DIR=gingerbread
 else
    JENKINS_BUILD_DIR=$REPO_BRANCH
