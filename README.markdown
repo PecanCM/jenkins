@@ -1,5 +1,5 @@
 # Accessing the Build Server
-http://builder.pecancm.insomnia247.nl/
+http://jenkins-pecancm.tk/
 
 # Authenticating to the Build Server
 You must be a member of the PecanCM organization.  
