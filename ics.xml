@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-<project name="PecanCM/lge-kernel-pecan" path="kernel/lge/p350" remote="github" revision="ics" />
+<!--<project name="PecanCM/lge-kernel-pecan" path="kernel/lge/p350" remote="github" revision="ics" />-->
 <project name="PecanCM/android_device_lge_p350" path="device/lge/p350" remote="github" revision="ics" />
 <project path="kernel/lge/p350" name="PecanCM/lge-kernel-pecan" revision="android-msm-2.6.32" />
 </manifest>
