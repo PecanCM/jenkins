@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project path="device/htc/runnymede" name="RunnyCM/android_device_htc_runnymede" revision="cfx" />
+  <project path="vendor/htc/runnymede" name="RunnyCM/android_vendor_htc_runnymede" revision="cfx" />
+  <!--<project path="device/htc/msm7x30-common" name="device_htc_msm7x30-common" remote="cfx" revision="jb-devel" /> downloaded in main repo -->
+  <!--<project path="kernel/htc/runnymede" name="RunnyCM/kernel-htc-runnymede" revision="jb-devel" />-->
+
+  <project path="device/lge/p350" name="PecanCM/android_device_lge_p350" />
+  <project path="vendor/lge" name="PecanCM/cm_vendor_lge" />
+  <project path="kernel/lge/p350" name="PecanCM/lge-kernel-pecan" revision="android-msm-2.6.32" />
+</manifest>

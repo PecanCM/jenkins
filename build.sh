@@ -97,7 +97,12 @@ then
   CORE_BRANCH=$REPO_BRANCH
 fi
 rm -rf .repo/manifests*
+if [[ "$mod" =~ "cfx" ]]
+then
+repo init -u https://www.bitbucket.org/codefirex/android.git -b $CORE_BRANCH --reference=/usr/local/cfx/$BUILD_BRANCH
+else
 repo init -u $SYNC_PROTO://github.com/PecanCM/android.git -b $CORE_BRANCH --reference=/usr/local/android/$BUILD_BRANCH
+fi
 check_result "repo init failed."
 
 # make sure ccache is in PATH
@@ -115,7 +120,11 @@ then
   . ~/.jenkins_profile
 fi
 
+if [[ "$mod" =~ "cfx" ]]
+cp $WORKSPACE/jenkins/cfx/$REPO_BRANCH.xml .repo/local_manifest.xml
+else
 cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifest.xml
+fi
 
 echo Core Manifest:
 cat .repo/manifests/default.xml
@@ -158,6 +167,7 @@ rm -f $OUT/cm-*.zip*
 
 UNAME=$(uname)
 
+if [[ ! mod =~ "cfx" ]]
 if [ "$RELEASE_TYPE" = "CM_NIGHTLY" ]
 then
   if [ "$REPO_BRANCH" = "gingerbread" ]
@@ -177,10 +187,12 @@ then
   export CM_RELEASE=true
 fi
 
+
 if [ ! -z "$CM_EXTRAVERSION" ]
 then
   export CM_EXPERIMENTAL=true
 fi
+
 
 if [ ! -z "$GERRIT_CHANGES" ]
 then
@@ -195,6 +207,7 @@ then
     check_result "gerrit picks failed."
   fi
 fi
+fi #if [[ ! mod =~ "cfx" ]]
 
 if [ ! "$(ccache -s|grep -E 'max cache size'|awk '{print $4}')" = "100.0" ]
 then
@@ -225,7 +238,11 @@ echo "$REPO_BRANCH-$CORE_BRANCH" > .last_branch
 time mka bacon recoveryzip recoveryimage #checkapi
 check_result "Build failed."
 
+if [[ "$mod" =~ "cfx" ]]
+for f in $(ls $OUT/cfx-*.zip*)
+else
 for f in $(ls $OUT/cm-*.zip*)
+fi
 do
   ln $f $WORKSPACE/archive/$(basename $f)
 done
@@ -239,7 +256,11 @@ then
 fi
 
 # archive the build.prop as well
+if [[ "$mod" =~ "cfx" ]]
+ZIP=$(ls $WORKSPACE/archive/cfx-*.zip)
+else
 ZIP=$(ls $WORKSPACE/archive/cm-*.zip)
+fi
 unzip -p $ZIP system/build.prop > $WORKSPACE/archive/build.prop
 
 # CORE: save manifest used for build (saving revisions as current HEAD)
