@@ -121,6 +121,7 @@ then
 fi
 
 if [[ "$mod" =~ "cfx" ]]
+then
 cp $WORKSPACE/jenkins/cfx/$REPO_BRANCH.xml .repo/local_manifest.xml
 else
 cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifest.xml
@@ -239,6 +240,7 @@ time mka bacon recoveryzip recoveryimage #checkapi
 check_result "Build failed."
 
 if [[ "$mod" =~ "cfx" ]]
+then
 for f in $(ls $OUT/cfx-*.zip*)
 else
 for f in $(ls $OUT/cm-*.zip*)
@@ -257,6 +259,7 @@ fi
 
 # archive the build.prop as well
 if [[ "$mod" =~ "cfx" ]]
+then
 ZIP=$(ls $WORKSPACE/archive/cfx-*.zip)
 else
 ZIP=$(ls $WORKSPACE/archive/cm-*.zip)
