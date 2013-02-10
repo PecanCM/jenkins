@@ -5,8 +5,14 @@ then
 fi
 
 cd $WORKSPACE
+if [[ "$mod" =~ "cfx" ]]
+then
+mkdir -p ../android/cfx
+cd ../android/cfx
+else
 mkdir -p ../android
 cd ../android
+fi
 export WORKSPACE=$PWD
 
 if [ ! -d jenkins ]
