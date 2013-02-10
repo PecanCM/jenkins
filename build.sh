@@ -169,6 +169,7 @@ rm -f $OUT/cm-*.zip*
 UNAME=$(uname)
 
 if [[ ! mod =~ "cfx" ]]
+then
 if [ "$RELEASE_TYPE" = "CM_NIGHTLY" ]
 then
   if [ "$REPO_BRANCH" = "gingerbread" ]
@@ -208,7 +209,7 @@ then
     check_result "gerrit picks failed."
   fi
 fi
-fi #if [[ ! mod =~ "cfx" ]]
+fi # if [[ ! mod =~ "cfx" ]]
 
 if [ ! "$(ccache -s|grep -E 'max cache size'|awk '{print $4}')" = "100.0" ]
 then
