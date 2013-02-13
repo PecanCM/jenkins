@@ -243,12 +243,15 @@ check_result "Build failed."
 if [[ "$mod" =~ "cfx" ]]
 then
 for f in $(ls $OUT/cfx-*.zip*)
-else
-for f in $(ls $OUT/cm-*.zip*)
-fi
 do
   ln $f $WORKSPACE/archive/$(basename $f)
 done
+else
+for f in $(ls $OUT/cm-*.zip*)
+do
+  ln $f $WORKSPACE/archive/$(basename $f)
+done
+fi
 if [ -f $OUT/utilties/update.zip ]
 then
   cp $OUT/utilties/update.zip $WORKSPACE/archive/recovery.zip
