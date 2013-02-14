@@ -134,7 +134,7 @@ echo Local Manifest:
 cat .repo/local_manifest.xml
 
 echo Syncing...
-repo sync -d -c -f -j18
+repo sync -d -c -f -j18 -D
 check_result "repo sync failed."
 echo Sync complete.
 
