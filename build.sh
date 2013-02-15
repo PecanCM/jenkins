@@ -120,16 +120,16 @@ then
   . ~/.jenkins_profile
 fi
 
+
+rm -f .repo/local_manifest.xml
+rm -rf .repo/local_manifests/
+
 mkdir -p .repo/local_manifests
 if [[ "$mod" =~ "cfx" ]]
 then
-rm -f .repo/local_manifest.xml
-rm -rf .repo/local_manifest/
-cp $WORKSPACE/jenkins/cfx/$REPO_BRANCH.xml .repo/local_manifest.xml
+cp $WORKSPACE/jenkins/cfx/$REPO_BRANCH.xml .repo/local_manifests/$REPO_BRANCH.xml
 else
-rm -f .repo/local_manifest.xml
-rm -rf .repo/local_manifest/
-cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifests/
+cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifests/$REPO_BRANCH.xml
 fi
 
 echo Core Manifest:
