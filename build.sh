@@ -134,6 +134,10 @@ cat .repo/manifests/default.xml
 echo Local Manifest:
 cat .repo/local_manifests/$REPO_BRANCH.xml
 
+echo "saving the last repo diff purely for just incase"
+rm -f $WORKSPACE/archive/last.diff
+repo diff > $WORKSPACE/archive/last.diff
+
 echo Syncing...
 repo sync forall -c "git reset --hard" -d -f -j18 
 check_result "repo sync failed."
