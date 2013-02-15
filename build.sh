@@ -96,7 +96,7 @@ if [ -z "$CORE_BRANCH" ]
 then
   CORE_BRANCH=$REPO_BRANCH
 fi
-rm -rf .repo/manifests*
+rm -rf .repo/*manifest*
 if [[ "$mod" =~ "cfx" ]]
 then
 repo init -u https://www.bitbucket.org/codefirex/android.git -b $CORE_BRANCH --reference=/usr/local/cfx/$BUILD_BRANCH
