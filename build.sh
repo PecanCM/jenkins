@@ -120,18 +120,19 @@ then
   . ~/.jenkins_profile
 fi
 
+mkdir -p .repo/local_manifests
 if [[ "$mod" =~ "cfx" ]]
 then
 cp $WORKSPACE/jenkins/cfx/$REPO_BRANCH.xml .repo/local_manifest.xml
 else
-cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifest.xml
+cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifests/
 fi
 
 echo Core Manifest:
 cat .repo/manifests/default.xml
 
 echo Local Manifest:
-cat .repo/local_manifest.xml
+cat .repo/local_manifests/$REPO_BRANCH.xml
 
 echo Syncing...
 repo sync forall -c "git reset --hard" -d -f -j18 
@@ -162,6 +163,8 @@ lunch $LUNCH
 check_result "lunch failed."
 
 # save manifest used for build (saving revisions as current HEAD)
+rm -f .repo/local_manifest.xml
+rm -f .repo/local_manifest/$REPO_BRANCH.xml
 repo manifest -o $WORKSPACE/archive/manifest.xml -r
 
 rm -f $OUT/cm-*.zip*
