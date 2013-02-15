@@ -142,6 +142,11 @@ echo "saving the last repo diff purely for just incase"
 rm -f $WORKSPACE/archive/last.diff
 repo diff > $WORKSPACE/archive/last.diff
 
+if [[ -s "$WORKSPACE/archive/last.diff" ]]; then
+echo "diff is empty, deleting..."
+rm -f $WORKSPACE/archive/last.diff
+fi
+
 echo cleaning repo...
 repo forall -c "git reset --hard"
 
