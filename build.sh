@@ -142,8 +142,11 @@ echo "saving the last repo diff purely for just incase"
 rm -f $WORKSPACE/archive/last.diff
 repo diff > $WORKSPACE/archive/last.diff
 
+echo cleaning repo...
+repo forall -c "git reset --hard"
+
 echo Syncing...
-repo sync forall -c "git reset --hard" -d -f -j18 
+repo sync -d -f -j18
 check_result "repo sync failed."
 echo Sync complete.
 
