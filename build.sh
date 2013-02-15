@@ -134,7 +134,7 @@ echo Local Manifest:
 cat .repo/local_manifest.xml
 
 echo Syncing...
-repo sync -d -c -f -j18 -D
+repo sync forall -c "git reset --hard" -d -f -j18 
 check_result "repo sync failed."
 echo Sync complete.
 
