@@ -147,8 +147,10 @@ echo "diff is empty, deleting..."
 rm -f $WORKSPACE/archive/last.diff
 fi
 
+if [[ "$REPO_CLEAN" =~ "yes" ]]; then
 echo cleaning repo...
 repo forall -c "git reset --hard"
+fi
 
 echo Syncing...
 repo sync -d -f -j18
