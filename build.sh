@@ -26,12 +26,6 @@ then
   exit 1
 fi
 
-if [ -z "$REPO_BRANCH" ]
-then
-  echo REPO_BRANCH not specified
-  exit 1
-fi
-
 if [ -z "$LUNCH" ]
 then
   echo LUNCH not specified
@@ -44,9 +38,21 @@ then
   exit 1
 fi
 
-if [ -z "$SYNC_PROTO" ]
+if [ -z "$CUST_FETCH" ]
 then
-  SYNC_PROTO=http
+echo custom repo not defined, defaulting to PecanCM repo
+  FETCH='git://github.com/PecanCM/android.git'
+else
+echo 'using custom repo $CUST_FETCH'
+  FETCH=$CUST_FETCH
+fi
+
+if [ -z "$CUST_BRANCH" ]
+echo 'custom branch no defined, defaulting to $BRANCH'
+  BRANCH=$REPO_BRANCH
+else
+echo 'using custom branch $CUST_BRANCH'
+  BRANCH=$CUST_BRANCH
 fi
 
 # colorization fix in Jenkins
@@ -81,10 +87,10 @@ fi
 git config --global user.name $(whoami)@$NODE_NAME
 git config --global user.email cm.pecan@yahoo.com
 
-if [[ "$REPO_BRANCH" =~ "gingerbread" || $REPO_BRANCH =~ "gb-release-7.2" ]]; then 
+if [[ "$BRANCH" =~ "gingerbread" || $BRANCH =~ "gb-release-7.2" ]]; then 
    JENKINS_BUILD_DIR=gingerbread
 else
-   JENKINS_BUILD_DIR=$REPO_BRANCH
+   JENKINS_BUILD_DIR=$BRANCH
 fi
 
 mkdir -p $JENKINS_BUILD_DIR
@@ -94,19 +100,19 @@ cd $JENKINS_BUILD_DIR
 # and the "default" upstream branch can get stuck on whatever was init first.
 if [ -z "$CORE_BRANCH" ]
 then
-  CORE_BRANCH=$REPO_BRANCH
+  CORE_BRANCH=$BRANCH
 fi
 rm -rf .repo/*manifest*
 if [[ "$mod" =~ "cfx" ]]
 then
 repo init -u https://www.bitbucket.org/codefirex/android.git -b $CORE_BRANCH --reference=/usr/local/cfx/$BUILD_BRANCH
 else
-repo init -u $SYNC_PROTO://github.com/PecanCM/android.git -b $CORE_BRANCH --reference=/usr/local/android/$BUILD_BRANCH
+repo init -u $FETCH -b $CORE_BRANCH --reference=/usr/local/android/$BUILD_BRANCH
 fi
 check_result "repo init failed."
 
 # make sure ccache is in PATH
-if [[ "$REPO_BRANCH" =~ "jellybean" || $REPO_BRANCH =~ "cm-10" ]]
+if [[ "$BRANCH" =~ "jellybean" || $BRANCH =~ "cm-10" ]]
 then
 export PATH="$PATH:/opt/local/bin/:$PWD/prebuilts/misc/$(uname|awk '{print tolower($0)}')-x86/ccache"
 export CCACHE_DIR=~/.jb_ccache
@@ -127,16 +133,16 @@ rm -rf .repo/local_manifests/
 mkdir -p .repo/local_manifests
 if [[ "$mod" =~ "cfx" ]]
 then
-cp $WORKSPACE/jenkins/cfx/$REPO_BRANCH.xml .repo/local_manifests/$REPO_BRANCH.xml
+cp $WORKSPACE/jenkins/cfx/$BRANCH.xml .repo/local_manifests/$BRANCH.xml
 else
-cp $WORKSPACE/jenkins/$REPO_BRANCH.xml .repo/local_manifests/$REPO_BRANCH.xml
+cp $WORKSPACE/jenkins/$BRANCH.xml .repo/local_manifests/$BRANCH.xml
 fi
 
 echo Core Manifest:
 cat .repo/manifests/default.xml
 
 echo Local Manifest:
-cat .repo/local_manifests/$REPO_BRANCH.xml
+cat .repo/local_manifests/$BRANCH.xml
 
 echo "saving the last repo diff purely for just incase"
 rm -f $WORKSPACE/archive/last.diff
@@ -157,9 +163,9 @@ repo sync -d -f -j18
 check_result "repo sync failed."
 echo Sync complete.
 
-if [ -f $WORKSPACE/jenkins/$REPO_BRANCH-setup.sh ]
+if [ -f $WORKSPACE/jenkins/$BRANCH-setup.sh ]
 then
-  $WORKSPACE/jenkins/$REPO_BRANCH-setup.sh
+  $WORKSPACE/jenkins/$BRANCH-setup.sh
 fi
 
 if [ -f .last_branch ]
@@ -167,10 +173,10 @@ then
   LAST_BRANCH=$(cat .last_branch)
 else
   echo "Last build branch is unknown, assume clean build"
-  LAST_BRANCH=$REPO_BRANCH-$CORE_BRANCH
+  LAST_BRANCH=$BRANCH-$CORE_BRANCH
 fi
 
-if [ "$LAST_BRANCH" != "$REPO_BRANCH-$CORE_BRANCH" ]
+if [ "$LAST_BRANCH" != "$BRANCH-$CORE_BRANCH" ]
 then
   echo "Branch has changed since the last build happened here. Forcing cleanup."
   CLEAN="true"
@@ -182,7 +188,7 @@ check_result "lunch failed."
 
 # save manifest used for build (saving revisions as current HEAD)
 rm -f .repo/local_manifest.xml
-rm -f .repo/local_manifest/$REPO_BRANCH.xml
+rm -f .repo/local_manifest/$BRANCH.xml
 repo manifest -o $WORKSPACE/archive/manifest.xml -r
 
 rm -f $OUT/cm-*.zip*
@@ -193,7 +199,7 @@ if [[ ! mod =~ "cfx" ]]
 then
 if [ "$RELEASE_TYPE" = "CM_NIGHTLY" ]
 then
-  if [ "$REPO_BRANCH" = "gingerbread" ]
+  if [ "$BRANCH" = "gingerbread" ]
   then
     export CYANOGEN_NIGHTLY=true
   else
@@ -256,7 +262,7 @@ else
   echo "Skipping clean: $TIME_SINCE_LAST_CLEAN hours since last clean."
 fi
 
-echo "$REPO_BRANCH-$CORE_BRANCH" > .last_branch
+echo "$BRANCH-$CORE_BRANCH" > .last_branch
 
 time mka bacon recoveryzip recoveryimage #checkapi
 check_result "Build failed."
