@@ -2,5 +2,5 @@
 <manifest>
   <project path="device/lge/p350" name="PecanCM/android_device_lge_p350" />
   <project path="vendor/lge" name="PecanCM/cm_vendor_lge" />
-  <project path="kernel/lge/p350" name="PecanCM/lge-kernel-pecan" revision="android-msm-3.0-jb" />
+  <project path="kernel/lge/p350" name="PecanCM/lge-kernel-pecan" revision="jb_chocolate" />
 </manifest>
